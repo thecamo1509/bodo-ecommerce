@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.left {
+    justify-content: left;
+}
+
+.center {
+    justify-content: center;
+}
+
+.right {
+    justify-content: right;
+}
