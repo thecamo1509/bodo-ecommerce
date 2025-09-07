@@ -1,8 +1,6 @@
 import { Resend } from "resend"
 import { WelcomeNewsletter } from "@/components/emailTemplates/newsLetter/welcomeNewsletter"
 
-import { Resend } from "resend"
-import { WelcomeNewsletter } from "@/components/emailTemplates/newsLetter/welcomeNewsletter"
 
 export async function POST(request: Request) {
     try {
