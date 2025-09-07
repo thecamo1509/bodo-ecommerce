@@ -1,13 +1,19 @@
 "use server"
 
+import { sendNewsletterEmail } from "@/lib/utils/emails/sendNewsletterEmail"
 export const subscribe = async (email: string) => {
-    // Usar URL relativa - siempre funciona
-    const response = await fetch('/api/emails/newsletter', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-    })
-    return response.json()
+    try {
+        const result = await sendNewsletterEmail(email)
+        return { 
+            success: true, 
+            messageId: result.messageId,
+            message: "Welcome email sent successfully" 
+        }
+    } catch (error) {
+        console.error("Newsletter subscription error:", error)
+        return { 
+            success: false, 
+            error: error instanceof Error ? error.message : "Failed to send email"
+        }
+    }
 }
