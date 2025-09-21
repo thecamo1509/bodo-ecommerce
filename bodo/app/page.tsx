@@ -18,7 +18,6 @@ export default async function Home() {
   const contactInfo = homeInfo.thirdCard
   const contactImage = homeInfo.contactImage.url
   const host = process.env.STRAPI_HOST
-  console.log("--------->", homeInfo)
   return (
     comingSoonMode ? <ComingSoonPage /> : 
     <>
