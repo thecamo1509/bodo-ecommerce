@@ -13,8 +13,6 @@ export async function POST(request: Request) {
         }
 
         const result = await sendNewsletterEmail(email)
-        
-        console.log("Email sent successfully:", result.messageId)
 
         return Response.json({ 
             success: true, 
