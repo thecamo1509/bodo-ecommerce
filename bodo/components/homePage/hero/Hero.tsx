@@ -53,10 +53,10 @@ export function Hero({
   const bgUrl = useMemo(() => {
     if (!current) return ""
     if ("sliderBackground" in current) {
-      const rel = pickFromStrapi(current.sliderBackground)
+      const rel = pickFromStrapi(current?.sliderBackground)
       return makeAbsolute(baseHost, rel)
     } else {
-      return makeAbsolute(baseHost, current.heroBackgroundUrl)
+      return makeAbsolute(baseHost, current?.heroBackgroundUrl)
     }
   }, [current, baseHost])
 
@@ -124,10 +124,10 @@ export function Hero({
             className={styles.titleInner}
             aria-live="polite"
           >
-            {"sliderText" in (current ?? {}) && (current as any).sliderText ? (
+            {"sliderText" in (current ?? {}) && (current as any)?.sliderText ? (
               <BlocksRenderer content={(current as any).sliderText} />
-            ) : "heroTitle" in (current ?? {}) && (current as any).heroTitle ? (
-              <BlocksRenderer content={(current as any).heroTitle} />
+            ) : "heroTitle" in (current ?? {}) && (current as any)?.heroTitle ? (
+              <BlocksRenderer content={(current as any)?.heroTitle} />
             ) : (
               <div>Loading...</div>
             )}
