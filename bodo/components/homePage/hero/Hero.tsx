@@ -124,10 +124,12 @@ export function Hero({
             className={styles.titleInner}
             aria-live="polite"
           >
-            {"sliderText" in (current ?? {}) ? (
+            {"sliderText" in (current ?? {}) && (current as any).sliderText ? (
               <BlocksRenderer content={(current as any).sliderText} />
-            ) : (
+            ) : "heroTitle" in (current ?? {}) && (current as any).heroTitle ? (
               <BlocksRenderer content={(current as any).heroTitle} />
+            ) : (
+              <div>Loading...</div>
             )}
           </motion.div>
         </AnimatePresence>
