@@ -13,10 +13,16 @@ import { AnimateOnScroll } from "@/components/ui/animate-on-scroll";
 export default async function Home() {
   const homeInfo = await getHomeInfo()
   const comingSoonMode = process.env.COMING_SOON_MODE === "true"
-  const heroInfo = homeInfo.sliderItem
-  const cardInfo = homeInfo.firstCard
-  const contactInfo = homeInfo.thirdCard
-  const contactImage = homeInfo.contactImage.url
+  const heroInfo = homeInfo?.sliderItem || []
+  const cardInfo = homeInfo?.firstCard || { 
+    cardTitle: 'Welcome', 
+    cardDescription: [{ type: 'paragraph', children: [{ text: 'Content loading...', type: 'text' }] }] 
+  }
+  const contactInfo = homeInfo?.thirdCard || { 
+    cardTitle: 'Contact', 
+    cardDescription: [{ type: 'paragraph', children: [{ text: 'Get in touch', type: 'text' }] }] 
+  }
+  const contactImage = homeInfo?.contactImage?.url || ''
   const host = process.env.STRAPI_HOST
   return (
     comingSoonMode ? <ComingSoonPage /> : 
