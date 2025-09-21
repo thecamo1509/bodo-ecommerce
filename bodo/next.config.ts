@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: process.env.STRAPI_HOST_DOMAIN || "localhost",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
