@@ -1,0 +1,91 @@
+.container {
+    position: relative;
+    width: 100%;
+    min-height: 70vh;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    border-radius: 1.5rem;
+    color: #fff;
+  }
+  .container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(0,0,0,.55) 0%,
+      rgba(0,0,0,.35) 30%,
+      rgba(0,0,0,.35) 70%,
+      rgba(0,0,0,.6) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  /* Capa de fondo (debajo del overlay) */
+  .bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .title {
+    position: relative;
+    z-index: 2;
+    padding: 0 1.25rem;
+    font-weight: 300;
+    text-align: center;
+    width: min(1100px, 95%);
+  }
+  .titleInner :global(h1),
+  .titleInner :global(h2) {
+    margin: 0;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    font-size: clamp(2rem, 1.4rem + 3vw, 4rem);
+  }
+  .titleInner :global(p) {
+    margin-top: 0.75rem;
+    font-size: clamp(1rem, 0.95rem + 0.4vw, 1.25rem);
+    opacity: 0.9;
+  }
+  
+  .dots {
+    position: absolute;
+    left: 50%;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 3;
+  }
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.45);
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: transform .2s ease, background-color .2s ease;
+  }
+  .dot:hover,
+  .dot:focus-visible { background: rgba(255,255,255,.7); outline: none; }
+  .dotActive { background: #fff; transform: scale(1.15); }
+  
+  /* a11y */
+  .srOnly {
+    position: absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      min-height: 70vh;
+    }
+  }

@@ -5,7 +5,7 @@ import {Toaster} from "@/components/ui/sonner"
 
 export const metadata: Metadata = {
   title: "Bodo",
-  description: "GWe transform ordinary spaces into extraordinary experiences",
+  description: "We transform ordinary spaces into extraordinary experiences",
 };
 
 export default function RootLayout({
@@ -21,7 +21,7 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          enableSystem
+          forcedTheme="dark"
           disableTransitionOnChange
         >
           {children}

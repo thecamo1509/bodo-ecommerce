@@ -1,0 +1,84 @@
+.container{
+    display: flex;
+    background-color: #fff;
+    color: #000;
+    padding: 4rem;
+    border-radius: 1rem;
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.leftContainer{
+    font-size: 1.5rem;
+    font-weight: 500;
+    min-width: 20%;
+}
+
+.leftAction{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rightContainer{
+    min-width: 80%;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: justify;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+    .container {
+        padding: 2rem;
+    }
+    .content {
+        flex-direction: column;
+        gap: 1rem;
+        max-width: 100%;
+    }
+    .leftContainer {
+        min-width: 100%;
+    }
+    .rightContainer {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        gap: 1rem;
+        max-width: 100%;
+    }
+    .leftContainer {
+        flex-direction: column;
+        align-items: center;
+        min-width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .leftAction {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .rightContainer {
+        min-width: 100%;
+        font-size: 1.5rem;
+        line-height: 1.2;
+    }
+}

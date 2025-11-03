@@ -1,0 +1,189 @@
+/* Scroll-lock amplio y compatible */
+:global(html.no-scroll),
+:global(html.no-scroll) body {
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+/* Header */
+.wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: transparent;
+  padding: 0.5rem 1rem;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  max-width: 1500px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.scrolled {
+  background: rgba(0,0,0,0.35);
+  padding: 0.5rem 1rem;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Mobile: fixed header + spacer dinámico */
+@media (max-width: 767px) {
+  .wrapper {
+    position: fixed;
+    left: 0;
+    right: 0;
+    padding: 0.5rem 1rem;
+  }
+  .spacer { height: var(--header-height, 72px); }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 1rem auto;
+}
+
+.logo { display: inline-flex; align-items: center; }
+
+.menu {
+  display: none;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #fff;
+  font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.1rem);
+  font-weight: 500;
+  padding: 0.2rem 1rem;
+  border-radius: 1rem;
+  background-color: transparent;
+  border: 1px solid #fff;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.menu a:hover,
+.menu a:focus-visible {
+  background-color: #fff;
+  color: #000;
+  outline: none;
+}
+
+.burger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 0.8rem;
+  border: 1px solid #fff;
+  background: transparent;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 6px;
+  color: #fff;
+}
+.burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #fff;
+  margin: 0;
+  transition: transform .2s ease, opacity .2s ease;
+}
+.burger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.burger.active span:nth-child(2) { opacity: 0; }
+.burger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* Drawer – SIN overflow horizontal cuando está cerrado */
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  width: min(60vw, 360px);
+  padding-top: max(1rem, env(safe-area-inset-top));
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+
+  background: #000 !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+
+  isolation: isolate;
+  pointer-events: none;
+  visibility: hidden;
+
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  /* 👇 mueve MÁS que 100% para que la sombra no cree scroll X */
+  transform: translateX(calc(100% + 24px));
+  transition: transform .25s ease;
+
+  z-index: 60;
+
+  /* evita que pinte fuera de su caja y ensanche el layout */
+  contain: paint;
+  box-shadow: none; /* <- nada de sombra mientras está cerrado */
+}
+.mobileMenu.open {
+  transform: translateX(0);
+  pointer-events: auto;
+  visibility: visible;
+  box-shadow: -8px 0 24px rgba(0,0,0,.35); /* <- solo cuando abierto */
+}
+
+.mobileInner {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0 1rem;
+}
+
+.mobileLink {
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  font-size: clamp(1rem, 0.95rem + 0.6vw, 1.25rem);
+  font-weight: 600;
+  padding: 0.9rem 1rem;
+  border-radius: 0.8rem;
+  border: 1px solid #333;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.mobileLink:hover,
+.mobileLink:focus-visible {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+  outline: none;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  border: 0;
+  padding: 0;
+  margin: 0;
+  z-index: 55;
+  touch-action: none; /* previene scroll detrás en iOS/emulador */
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .menu { display: flex; }
+  .burger, .mobileMenu, .backdrop { display: none; }
+}
+
+/* Respeta reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .menu a,
+  .burger span,
+  .mobileMenu { transition: none; }
+}

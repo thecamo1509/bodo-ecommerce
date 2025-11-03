@@ -12,11 +12,7 @@ export async function POST(request: Request) {
             }, { status: 400 })
         }
 
-        console.log("Attempting to send email to:", email)
-
         const result = await sendNewsletterEmail(email)
-        
-        console.log("Email sent successfully:", result.messageId)
 
         return Response.json({ 
             success: true, 
